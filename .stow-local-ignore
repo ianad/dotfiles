@@ -1,0 +1,10 @@
+README\.md
+LICENSE
+bootstrap\.sh
+Brewfile
+apt-packages\.sh
+lib
+\.git
+\.gitignore
+\.gitattributes
+\.stow-local-ignore

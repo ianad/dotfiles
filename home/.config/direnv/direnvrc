@@ -1,0 +1,2 @@
+# Custom direnv config. Empty for now — reserves a versioned home for future
+# helpers (e.g. layout_uv, source_up_if_exists patterns).

@@ -1,0 +1,17 @@
+[user]
+	name = ianad
+	email = 15161582+ianad@users.noreply.github.com
+
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = false
