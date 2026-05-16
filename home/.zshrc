@@ -2,9 +2,18 @@
 
 # ---- oh-my-zsh ---------------------------------------------------------------
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="robbyrussell"
-plugins=(git)
+# Custom theme lives at ~/.oh-my-zsh/custom/themes/cognician.zsh-theme (stowed).
+# Falls back to robbyrussell if the custom theme isn't present yet.
+if [[ -f "$ZSH/custom/themes/cognician.zsh-theme" ]]; then
+  ZSH_THEME="cognician"
+else
+  ZSH_THEME="robbyrussell"
+fi
+plugins=(git npm)
 source $ZSH/oh-my-zsh.sh
+
+# Suppress brew's "you can opt out of analytics" / cleanup hints.
+export HOMEBREW_NO_ENV_HINTS=1
 
 # ---- Homebrew (portable: Apple Silicon, Intel, Linuxbrew) -------------------
 for brew_path in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.linuxbrew/bin/brew; do
@@ -17,6 +26,12 @@ done
 # ---- PATH --------------------------------------------------------------------
 export PATH="$HOME/.local/bin:$PATH"
 [[ -d "$HOME/.opencode/bin" ]] && export PATH="$HOME/.opencode/bin:$PATH"
+[[ -d "$HOME/.lmstudio/bin" ]] && export PATH="$HOME/.lmstudio/bin:$PATH"
+
+# Java (openjdk@17 via brew) — only if installed
+if [[ -n "${HOMEBREW_PREFIX:-}" && -d "$HOMEBREW_PREFIX/opt/openjdk@17/bin" ]]; then
+  export PATH="$HOMEBREW_PREFIX/opt/openjdk@17/bin:$PATH"
+fi
 
 # ---- NVM (brew install if available, else standalone $HOME/.nvm) ------------
 export NVM_DIR="$HOME/.nvm"
@@ -38,6 +53,9 @@ fi
 
 # ---- direnv ------------------------------------------------------------------
 command -v direnv >/dev/null && eval "$(direnv hook zsh)"
+
+# ---- thefuck -----------------------------------------------------------------
+command -v thefuck >/dev/null && eval "$(thefuck --alias)"
 
 # ---- WSL niceties ------------------------------------------------------------
 if grep -qi microsoft /proc/version 2>/dev/null; then
@@ -70,3 +88,6 @@ function code() {
   done
   command code "${args[@]}"
 }
+
+# ---- Machine-local overrides & secrets (gitignored, not stowed) -------------
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
