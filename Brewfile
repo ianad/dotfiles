@@ -34,8 +34,9 @@ brew "openjdk@17"
 # ---- Data / DB --------------------------------------------------------------
 brew "duckdb"
 brew "postgresql@14"
-tap  "dbt-labs/dbt-cli"
-brew "dbt-labs/dbt-cli/dbt"
+# dbt Core is installed via `uv tool install` in bootstrap.sh, not brew.
+# The dbt-labs Homebrew tap distributes the Cloud CLI, which is a different
+# tool — use that only if you want to delegate runs to dbt Cloud.
 
 # ---- AI dev tooling ---------------------------------------------------------
 brew "opencode"

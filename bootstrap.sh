@@ -81,6 +81,13 @@ done
 log "Running brew bundle"
 brew bundle --file="$DOTFILES_DIR/Brewfile"
 
+# ---- 6b. Python CLI tools (via uv, which brew bundle just installed) --------
+# `uv tool install` is idempotent — re-running is a no-op when up to date.
+if command -v uv >/dev/null 2>&1; then
+  log "Installing Python CLI tools via uv"
+  uv tool install dbt-core --with dbt-snowflake
+fi
+
 # ---- 7. oh-my-zsh ------------------------------------------------------------
 if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
   log "Installing oh-my-zsh"

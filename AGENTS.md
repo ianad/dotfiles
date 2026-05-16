@@ -34,6 +34,7 @@ There is no build, lint, or test step. Shell scripts run under `set -euo pipefai
 
 - New CLI tool available on macOS + Linuxbrew → `Brewfile`.
 - Linux-only system package → `apt-packages.sh`.
+- Python CLI tool (e.g., dbt Core) → `uv tool install` line in `bootstrap.sh` step 6b, not the Brewfile.
 - New dotfile → drop under `home/<relative-path>` and re-stow.
 - Shell helper shared by multiple scripts → `lib/` and source it.
 
